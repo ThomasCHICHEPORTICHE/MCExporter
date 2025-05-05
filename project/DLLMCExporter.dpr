@@ -17,7 +17,8 @@ library DLLMCExporter;
 
 uses
   System.SysUtils,
-  System.Classes;
+  System.Classes,
+  Helper.JSON in '..\object\Helper.JSON.pas';
 
 {$R *.res}
 
