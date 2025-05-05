@@ -67,7 +67,8 @@ type
 
 const
   JSON_DEFAULT_STRING_VALUE: string = '';
-  JSON_DEFAULT_NUMERIC_VALUE:
+  JSON_DEFAULT_NUMERIC_VALUE: Integer = 0;
+  JSON_DEFAULT_BOOLEAN_VALUE: Boolean = False;
 
 implementation
 
@@ -81,42 +82,42 @@ function TJSONObjectHelper.GetBoolean(
   const AKey: string
 ): Boolean;
 begin
-  Result := InternalGetValue<Boolean>(AKey);
+  Result := InternalGetValue<Boolean>(AKey, JSON_DEFAULT_BOOLEAN_VALUE);
 end;
 
 function TJSONObjectHelper.GetDouble(
   const AKey: string
 ): Double;
 begin
-  Result := InternalGetValue<Double>(AKey);
+  Result := InternalGetValue<Double>(AKey, JSON_DEFAULT_NUMERIC_VALUE);
 end;
 
 function TJSONObjectHelper.GetInteger(
   const AKey: string
 ): Integer;
 begin
-  Result := InternalGetValue<Integer>(AKey);
+  Result := InternalGetValue<Integer>(AKey, JSON_DEFAULT_NUMERIC_VALUE);
 end;
 
 function TJSONObjectHelper.GetJSONArray(
   const AKey: string
 ): TJSONArray;
 begin
-    Result := InternalGetValue<TJSONArray>(AKey);
+    Result := InternalGetValue<TJSONArray>(AKey, nil);
 end;
 
 function TJSONObjectHelper.GetJSONObject(
   const AKey: string
 ): TJSONObject;
 begin
-    Result := InternalGetValue<TJSONObject>(AKey);
+    Result := InternalGetValue<TJSONObject>(AKey, nil);
 end;
 
 function TJSONObjectHelper.GetString(
   const AKey: string
 ): string;
 begin
-    Result := InternalGetValue<string>(AKey);
+    Result := InternalGetValue<string>(AKey, JSON_DEFAULT_STRING_VALUE);
 end;
 
 function TJSONObjectHelper.InternalGetValue<T>(
