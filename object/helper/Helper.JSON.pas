@@ -63,6 +63,10 @@ type
     function GetJSONArray(
       const AKey: string
     ): TJSONArray;
+
+    class function LoadFromFile(
+      const AFilename: string
+    ): TJSONObject;
   end;
 
 const
@@ -73,6 +77,7 @@ const
 implementation
 
 uses
+  System.IOUtils,
   System.RTTI,
   System.SysUtils,
   System.TypInfo
@@ -160,6 +165,13 @@ begin
     Result := AddPair(AKey, rValue.AsType<TJSONArray>)
   else
     raise Exception.Create('Unsupported type');
+end;
+
+class function TJSONObjectHelper.LoadFromFile(
+  const AFilename: string
+): TJSONObject;
+begin
+  Result := TJSONObject.ParseJSONValue(TFile.ReadAllText(AFilename)) as TJSONObject;
 end;
 
 { TJSONHelper }

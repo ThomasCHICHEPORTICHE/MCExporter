@@ -1,4 +1,4 @@
-library DLLMCExporter;
+library DLLCurseForge;
 
 { Remarque importante sur la gestion mémoire de la DLL : ShareMem doit être la
   première unité de la clause USES de votre bibliothèque ET la clause USES
@@ -18,9 +18,21 @@ library DLLMCExporter;
 uses
   System.SysUtils,
   System.Classes,
-  Helper.JSON in '..\object\Helper.JSON.pas';
+  System.Win.Registry,
+  System.IOUtils,
+  WinAPI.Windows,
+  Helper.JSON in '..\object\helper\Helper.JSON.pas',
+  Helper.Registry in '..\object\helper\Helper.Registry.pas',
+  CurseForge.Functions in '..\object\curseforge\CurseForge.Functions.pas',
+  CurseForge.Types in '..\object\curseforge\CurseForge.Types.pas',
+  CurseForge in '..\object\curseforge\CurseForge.pas',
+  CurseForge.Consts in '..\object\curseforge\CurseForge.Consts.pas';
 
 {$R *.res}
+
+exports IsCurseForgeInstalled;
+exports CurseForgeMinecraftRoot;
+exports CurseForgeInstanceList;
 
 begin
 end.

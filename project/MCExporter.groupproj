@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{724BF20E-B504-421F-BD8B-DE4331814C99}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="DLLCurseForge.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="AppMCExporter.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="DLLCurseForge">
+        <MSBuild Projects="DLLCurseForge.dproj"/>
+    </Target>
+    <Target Name="DLLCurseForge:Clean">
+        <MSBuild Projects="DLLCurseForge.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="DLLCurseForge:Make">
+        <MSBuild Projects="DLLCurseForge.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="AppMCExporter">
+        <MSBuild Projects="AppMCExporter.dproj"/>
+    </Target>
+    <Target Name="AppMCExporter:Clean">
+        <MSBuild Projects="AppMCExporter.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="AppMCExporter:Make">
+        <MSBuild Projects="AppMCExporter.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="DLLCurseForge;AppMCExporter"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="DLLCurseForge:Clean;AppMCExporter:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="DLLCurseForge:Make;AppMCExporter:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
