@@ -3,22 +3,51 @@ unit Form.Application;
 interface
 
 uses
-  System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
-  FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs;
+  FMX.Controls,
+  FMX.Dialogs,
+  FMX.Forms,
+  FMX.Graphics,
+  FMX.Types,
+  System.Classes,
+  System.SysUtils,
+  System.Types,
+  System.UITypes,
+  System.Variants,
+  FrameStand, FMX.Layouts
+  ;
 
 type
-  TForm1 = class(TForm)
+  TFormApplication = class(TForm)
+    LContent: TLayout;
+    LHeader: TLayout;
+    LFooter: TLayout;
+    LMain: TLayout;
+    procedure FormCreate(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
   private
     { Déclarations privées }
+    FFrameStand: TFrameStand;
   public
     { Déclarations publiques }
   end;
 
 var
-  Form1: TForm1;
+  FormApplication: TFormApplication;
 
 implementation
 
 {$R *.fmx}
+
+procedure TFormApplication.FormCreate(Sender: TObject);
+begin
+  FFrameStand               := TFrameStand.Create(Self);
+  FFrameStand.DefaultParent := LMain;
+end;
+
+procedure TFormApplication.FormDestroy(Sender: TObject);
+begin
+  FFrameStand.CloseAll;
+  FreeAndNil(FFrameStand);
+end;
 
 end.

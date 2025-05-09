@@ -1,11 +1,42 @@
-object Form1: TForm1
+object FormApplication: TFormApplication
   Left = 0
   Top = 0
-  Caption = 'Form1'
-  ClientHeight = 480
-  ClientWidth = 640
+  Caption = 'S'
+  ClientHeight = 720
+  ClientWidth = 1080
   FormFactor.Width = 320
   FormFactor.Height = 480
   FormFactor.Devices = [Desktop]
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
   DesignerMasterStyle = 0
+  object LContent: TLayout
+    Align = Client
+    Size.Width = 1080.000000000000000000
+    Size.Height = 720.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    object LHeader: TLayout
+      Align = MostTop
+      Size.Width = 1080.000000000000000000
+      Size.Height = 50.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+    end
+    object LFooter: TLayout
+      Align = MostBottom
+      Position.Y = 670.000000000000000000
+      Size.Width = 1080.000000000000000000
+      Size.Height = 50.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 1
+    end
+    object LMain: TLayout
+      Align = Client
+      Size.Width = 1080.000000000000000000
+      Size.Height = 620.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 2
+    end
+  end
 end
