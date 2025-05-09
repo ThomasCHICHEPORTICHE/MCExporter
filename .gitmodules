@@ -1,0 +1,3 @@
+[submodule "components/TFrameStand"]
+	path = components/TFrameStand
+	url = https://github.com/andrea-magni/TFrameStand.git
