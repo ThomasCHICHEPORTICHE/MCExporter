@@ -13,11 +13,13 @@ uses
   FMX.Skia,
   FMX.Types,
   System.Classes,
+  System.Generics.Collections,
   System.Skia,
   System.SysUtils,
   System.Types,
   System.UITypes,
-  System.Variants, TC.ResourceImage
+  System.Variants,
+  TC.ResourceImage
   ;
 
 type
@@ -35,15 +37,17 @@ type
 
     procedure LoadUI;
     procedure SetSelected(const Value: Boolean);
+    procedure SetCurseForgeInstance(const Value: TCurseForgeInstance);
   public
     { Déclarations publiques }
     property Selected: Boolean read FSelected write SetSelected;
-
-    constructor Create(
-      const ACurseForgeInstance: TCurseForgeInstance
-    ); reintroduce;
+    property CurseForgeInstance: TCurseForgeInstance read FCurseForgeInstance write SetCurseForgeInstance;
   end;
-
+  TFrameCurseForgeInstanceList = class(TObjectList<TFrameCurseForgeInstance>)
+  private
+  protected
+  public
+  end;
 implementation
 
 uses
@@ -53,16 +57,6 @@ uses
 {$R *.fmx}
 
 { TFrame1 }
-
-constructor TFrameCurseForgeInstance.Create(
-  const ACurseForgeInstance: TCurseForgeInstance
-);
-begin
-  inherited Create(nil);
-
-  FCurseForgeInstance := ACurseForgeInstance;
-  LoadUI;
-end;
 
 procedure TFrameCurseForgeInstance.FrameClick(Sender: TObject);
 begin
@@ -89,6 +83,13 @@ begin
   end;
 
   Selected := False;
+end;
+
+procedure TFrameCurseForgeInstance.SetCurseForgeInstance(
+  const Value: TCurseForgeInstance);
+begin
+  FCurseForgeInstance := Value;
+  LoadUI;
 end;
 
 procedure TFrameCurseForgeInstance.SetSelected(const Value: Boolean);

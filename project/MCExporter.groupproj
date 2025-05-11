@@ -9,6 +9,9 @@
         <Projects Include="AppMCExporter.dproj">
             <Dependencies/>
         </Projects>
+        <Projects Include="DLLMinecraftLauncher.dproj">
+            <Dependencies/>
+        </Projects>
     </ItemGroup>
     <ProjectExtensions>
         <Borland.Personality>Default.Personality.12</Borland.Personality>
@@ -35,14 +38,23 @@
     <Target Name="AppMCExporter:Make">
         <MSBuild Projects="AppMCExporter.dproj" Targets="Make"/>
     </Target>
+    <Target Name="DLLMinecraftLauncher">
+        <MSBuild Projects="DLLMinecraftLauncher.dproj"/>
+    </Target>
+    <Target Name="DLLMinecraftLauncher:Clean">
+        <MSBuild Projects="DLLMinecraftLauncher.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="DLLMinecraftLauncher:Make">
+        <MSBuild Projects="DLLMinecraftLauncher.dproj" Targets="Make"/>
+    </Target>
     <Target Name="Build">
-        <CallTarget Targets="DLLCurseForge;AppMCExporter"/>
+        <CallTarget Targets="DLLCurseForge;AppMCExporter;DLLMinecraftLauncher"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="DLLCurseForge:Clean;AppMCExporter:Clean"/>
+        <CallTarget Targets="DLLCurseForge:Clean;AppMCExporter:Clean;DLLMinecraftLauncher:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="DLLCurseForge:Make;AppMCExporter:Make"/>
+        <CallTarget Targets="DLLCurseForge:Make;AppMCExporter:Make;DLLMinecraftLauncher:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>

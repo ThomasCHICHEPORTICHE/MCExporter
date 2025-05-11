@@ -67,6 +67,18 @@ type
     class function LoadFromFile(
       const AFilename: string
     ): TJSONObject;
+    class function ParseJSONValue(
+      const AJSONString: string
+    ): TJSONObject;
+  end;
+
+  TJSONArrayHelper = class Helper for TJSONArray
+  private
+  protected
+  public
+    class function ParseJSONValue(
+      const AJSONString: string
+    ): TJSONArray;
   end;
 
 const
@@ -171,7 +183,14 @@ class function TJSONObjectHelper.LoadFromFile(
   const AFilename: string
 ): TJSONObject;
 begin
-  Result := TJSONObject.ParseJSONValue(TFile.ReadAllText(AFilename)) as TJSONObject;
+  Result := TJSONObject.ParseJSONValue(TFile.ReadAllText(AFilename));
+end;
+
+class function TJSONObjectHelper.ParseJSONValue(
+  const AJSONString: string
+): TJSONObject;
+begin
+  Result := TJSONObject(inherited ParseJSONValue(AJSONString));
 end;
 
 { TJSONHelper }
@@ -240,6 +259,15 @@ begin
   if (AValue = JSON_DEFAULT_STRING_VALUE) then
     Exit;
   Result := InternalSetValue<string>(AKey, AValue);
+end;
+
+{ TJSONArrayHelper }
+
+class function TJSONArrayHelper.ParseJSONValue(
+  const AJSONString: string
+): TJSONArray;
+begin
+  Result := TJSONArray(inherited ParseJSONValue(AJSONString));
 end;
 
 end.

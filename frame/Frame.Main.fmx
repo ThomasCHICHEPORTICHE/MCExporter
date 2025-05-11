@@ -52,6 +52,7 @@ object FrameMain: TFrameMain
       TabOrder = 0
       Text = 'Synchronize'
       TextSettings.Trimming = None
+      OnClick = BSyncClick
     end
   end
 end

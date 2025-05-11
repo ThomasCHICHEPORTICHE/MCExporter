@@ -1,7 +1,7 @@
 object FormApplication: TFormApplication
   Left = 0
   Top = 0
-  Caption = 'S'
+  Caption = 'AppMCExporter'
   ClientHeight = 720
   ClientWidth = 1080
   FormFactor.Width = 320
