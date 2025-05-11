@@ -51,6 +51,7 @@ begin
   if (not IsDLLLoaded) then
     Exit;
   FreeLibrary(FDLLHandle);
+  FreeAndNil(FProcDictionary);
 end;
 
 function TDLLLoader.GetIsDLLLoaded: Boolean;
@@ -65,7 +66,7 @@ begin
   Result := GetProcAddress(FDLLHandle, PChar(AProcName));
   if (not Assigned(Result)) then
     raise EDLLException.CreateFmt('Error : Can''t load proc %s !', [AProcName]);
-  FProcDictionary.Add(AProcName, Result);
+  ProcDictionary.Add(AProcName, Result);
 end;
 
 function TDLLLoader.GetProcDictionary: TDictionary<string, Pointer>;

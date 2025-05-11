@@ -315,6 +315,15 @@
             <FormType>fmx</FormType>
             <DesignClass>TFrame</DesignClass>
         </DCCReference>
+        <DCCReference Include="..\frame\Frame.CurseForge.Instance.pas">
+            <Form>FrameCurseForgeInstance</Form>
+            <FormType>fmx</FormType>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <RcItem Include="..\assets\image\checkbox.png">
+            <ResourceType>RCDATA</ResourceType>
+            <ResourceId>checkbox</ResourceId>
+        </RcItem>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>
@@ -353,6 +362,12 @@
                 </DeployFile>
                 <DeployFile LocalName="$(BDS)\Redist\osx32\libcgunwind.1.0.dylib" Class="DependencyModule">
                     <Platform Name="OSX32">
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="..\assets\image\checkbox.png" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
                         <Overwrite>true</Overwrite>
                     </Platform>
                 </DeployFile>
@@ -1316,10 +1331,8 @@
             <Platforms>
                 <Platform value="Android">True</Platform>
                 <Platform value="Android64">True</Platform>
-                <Platform value="iOSDevice32">False</Platform>
                 <Platform value="iOSDevice64">True</Platform>
                 <Platform value="iOSSimARM64">True</Platform>
-                <Platform value="OSX32">False</Platform>
                 <Platform value="OSX64">True</Platform>
                 <Platform value="OSXARM64">True</Platform>
                 <Platform value="Win32">True</Platform>

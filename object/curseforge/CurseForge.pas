@@ -29,7 +29,7 @@ uses
 
 class function TCurseForge.IsInstalled: Boolean;
 begin
-  Result := TRegistry.KeyExists(REGISTRY_KEY_CURRENT_USER, CurseForge.Consts.REGISTRY_CURSEFORGE_KEY_PATH);
+  Result := TRegistry.IsApplicationInstalled(CurseForge.Consts.CURSEFORGE_DISPLAY_NAME);
 end;
 
 class function TCurseForge.MinecraftInstanceList: string;

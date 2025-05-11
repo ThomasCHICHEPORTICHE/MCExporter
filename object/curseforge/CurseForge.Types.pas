@@ -10,14 +10,14 @@ uses
 type
   TCurseForgeInstance = class
   private
-    Fname: string;
+    FName: string;
     FVersion: string;
     FAuthor: string;
     FPath: string;
     FThumbnail: string;
   protected
   public
-    property Name: string read Fname;
+    property Name: string read FName;
     property Version: string read FVersion;
     property Author: string read FAuthor;
     property Path: string read FPath;
@@ -25,6 +25,9 @@ type
 
     class function FromInstanceDirectory(
       const APath: string
+    ): TCurseForgeInstance;
+    class function FromJSON(
+      const AJSONObject: TJSONObject
     ): TCurseForgeInstance;
 
     function ToJSON: TJSONObject;
@@ -34,6 +37,9 @@ type
   private
   protected
   public
+    class function FromJSON(
+      const AJSONArray: TJSONArray
+    ): TCurseForgeInstanceList;
     function ToJSON: TJSONArray;
   end;
 
@@ -62,7 +68,7 @@ class function TCurseForgeInstance.FromInstanceDirectory(
       Exit;
     try
 
-      Result.Fname    := oJSONObject.GetString('name');
+      Result.FName    := oJSONObject.GetString('name');
       Result.FVersion := oJSONObject.GetString('version');
       Result.FAuthor  := oJSONObject.GetString('author');
     finally
@@ -97,10 +103,22 @@ begin
   FromMinecraftInstanceJSON(Result);
 end;
 
+class function TCurseForgeInstance.FromJSON(
+  const AJSONObject: TJSONObject
+): TCurseForgeInstance;
+begin
+  Result            := TCurseForgeInstance.Create;
+  Result.FName      := AJSONObject.GetString('name');
+  Result.FVersion   := AJSONObject.GetString('version');
+  Result.FAuthor    := AJSONObject.GetString('author');
+  Result.FPath      := AJSONObject.GetString('path');
+  Result.FThumbnail := AJSONObject.GetString('thumbnail');
+end;
+
 function TCurseForgeInstance.ToJSON: TJSONObject;
 begin
   Result := TJSONObject.Create;
-  Result.SetString('name', Fname);
+  Result.SetString('name', FName);
   Result.SetString('version', FVersion);
   Result.SetString('author', FAuthor);
   Result.SetString('path', FPath);
@@ -108,6 +126,17 @@ begin
 end;
 
 { TCurseForgeInstanceList }
+
+class function TCurseForgeInstanceList.FromJSON(
+  const AJSONArray: TJSONArray
+): TCurseForgeInstanceList;
+var
+  rJSONValue: TJSONValue;
+begin
+  Result := TCurseForgeInstanceList.Create;
+  for rJSONValue in AJSONArray do
+    Result.Add(TCurseForgeInstance.FromJSON(TJSONObject(rJSONValue)));
+end;
 
 function TCurseForgeInstanceList.ToJSON: TJSONArray;
 var

@@ -3,4 +3,55 @@ object FrameMain: TFrameMain
   Size.Width = 1080.000000000000000000
   Size.Height = 620.000000000000000000
   Size.PlatformDefault = False
+  object VSBCurseForgeInstance: TVertScrollBox
+    Align = Client
+    Margins.Left = 8.000000000000000000
+    Margins.Top = 8.000000000000000000
+    Margins.Right = 8.000000000000000000
+    Margins.Bottom = 8.000000000000000000
+    Size.Width = 1064.000000000000000000
+    Size.Height = 540.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    Viewport.Width = 1064.000000000000000000
+    Viewport.Height = 540.000000000000000000
+    object GLCurseForgeInstance: TGridLayout
+      Align = Client
+      ItemHeight = 320.000000000000000000
+      ItemWidth = 320.000000000000000000
+      Orientation = Horizontal
+      Size.Width = 1064.000000000000000000
+      Size.Height = 540.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+    end
+  end
+  object LOption: TLayout
+    Align = MostBottom
+    Margins.Left = 8.000000000000000000
+    Margins.Top = 8.000000000000000000
+    Margins.Right = 8.000000000000000000
+    Margins.Bottom = 8.000000000000000000
+    Position.X = 8.000000000000000000
+    Position.Y = 564.000000000000000000
+    Size.Width = 1064.000000000000000000
+    Size.Height = 48.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 1
+    object BSync: TButton
+      Align = Right
+      Margins.Left = 4.000000000000000000
+      Margins.Top = 4.000000000000000000
+      Margins.Right = 4.000000000000000000
+      Margins.Bottom = 4.000000000000000000
+      Position.X = 900.000000000000000000
+      Position.Y = 4.000000000000000000
+      Size.Width = 160.000000000000000000
+      Size.Height = 40.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 0
+      Text = 'Synchronize'
+      TextSettings.Trimming = None
+    end
+  end
 end

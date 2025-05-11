@@ -181,6 +181,9 @@ function TJSONObjectHelper.SetBoolean(
   const AValue: Boolean
 ): TJSONObject;
 begin
+  Result := Self;
+  if (AValue = JSON_DEFAULT_BOOLEAN_VALUE) then
+    Exit;
   Result := InternalSetValue<Boolean>(AKey, AValue);
 end;
 
@@ -189,6 +192,9 @@ function TJSONObjectHelper.SetDouble(
   const AValue: Double
 ): TJSONObject;
 begin
+  Result := Self;
+  if (AValue = JSON_DEFAULT_NUMERIC_VALUE) then
+    Exit;
   Result := InternalSetValue<Double>(AKey, AValue);
 end;
 
@@ -197,6 +203,9 @@ function TJSONObjectHelper.SetInteger(
   const AValue: Integer
 ): TJSONObject;
 begin
+  Result := Self;
+  if (AValue = JSON_DEFAULT_NUMERIC_VALUE) then
+    Exit;
   Result := InternalSetValue<Integer>(AKey, AValue);
 end;
 
@@ -205,6 +214,9 @@ function TJSONObjectHelper.SetJSONArray(
   const AValue: TJSONArray
 ): TJSONObject;
 begin
+  Result := Self;
+  if (not Assigned(AValue)) then
+    Exit;
   Result := InternalSetValue<TJSONArray>(AKey, AValue);
 end;
 
@@ -213,6 +225,9 @@ function TJSONObjectHelper.SetJSONObject(
   const AValue: TJSONObject
 ): TJSONObject;
 begin
+  Result := Self;
+  if (not Assigned(AValue)) then
+    Exit;
   Result := InternalSetValue<TJSONObject>(AKey, AValue);
 end;
 
@@ -221,6 +236,9 @@ function TJSONObjectHelper.SetString(
   const AValue: string
 ): TJSONObject;
 begin
+  Result := Self;
+  if (AValue = JSON_DEFAULT_STRING_VALUE) then
+    Exit;
   Result := InternalSetValue<string>(AKey, AValue);
 end;
 

@@ -12,9 +12,9 @@ type
   private
   protected
   public
-//    class function IsApplicationInstalled(
-//      const ADisplayName: string
-//    ): Boolean;
+    class function IsApplicationInstalled(
+      const ADisplayName: string
+    ): Boolean;
 
     class function GetKey(
       const ARootKey: HKEY;
@@ -95,68 +95,68 @@ uses
   System.SysUtils
   ;
 
-//{
-//  This class function search in Registry if an application Is Installed.
-//
-//  @param(ADisplayName Application display name to find in registry.)
-//  @returns(True if application is installed, False otherwhise.)
-//}
-//class function TRegistryHelper.IsApplicationInstalled(
-//  const ADisplayName: string
-//): Boolean;
-//const
-//  ROOT_KEYS: array[0..2] of HKEY = (
-//    HKEY_LOCAL_MACHINE,
-//    HKEY_LOCAL_MACHINE,
-//    HKEY_CURRENT_USER
-//  );
-//  ROOT_PATHS: array[0..2] of string = (
-//    'SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall',
-//    'SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall',
-//    'SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall'
-//  );
-//  KEY: string = 'DisplayName';
-//var
-//  oRegistry: TRegistry;
-//  rKey: HKEY;
-//  sRootPath: string;
-//  oKeyNames: TStringList;
-//  sKey: string;
-//begin
-//  Result    := False;
-//  oRegistry := TRegistry.Create(KEY_READ);
-//  oKeyNames := TStringList.Create;
-//  try
-//    for rKey in ROOT_KEYS do
-//    begin
-//      oRegistry.RootKey := rKey;
-//      for sRootPath in ROOT_PATHS do
-//      begin
-//        if (not oRegistry.OpenKeyReadOnly(sRootPath)) then
-//          Continue;
-//        oRegistry.GetKeyNames(oKeyNames);
-//        oRegistry.CloseKey;
-//        for sKey in oKeyNames do
-//        begin
-//          if (not oRegistry.OpenKeyReadOnly(sRootPath + '\' + sKey)) then
-//            Continue;
-//          try
-//            if (oRegistry.ValueExists(KEY) and (oRegistry.ReadString(KEY).ToUpper.Contains(ADisplayName.ToUpper))) then
-//            begin
-//              Result := True;
-//              Exit;
-//            end;
-//          finally
-//            oRegistry.CloseKey;
-//          end;
-//        end;
-//      end;
-//    end;
-//  finally
-//    FreeAndNil(oRegistry);
-//    FreeAndNil(oKeyNames);
-//  end;
-//end;
+{
+  This class function search in Registry if an application Is Installed.
+
+  @param(ADisplayName Application display name to find in registry.)
+  @returns(True if application is installed, False otherwhise.)
+}
+class function TRegistryHelper.IsApplicationInstalled(
+  const ADisplayName: string
+): Boolean;
+const
+  ROOT_KEYS: array[0..2] of HKEY = (
+    HKEY_LOCAL_MACHINE,
+    HKEY_LOCAL_MACHINE,
+    HKEY_CURRENT_USER
+  );
+  ROOT_PATHS: array[0..2] of string = (
+    'SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall',
+    'SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall',
+    'SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall'
+  );
+  KEY: string = 'DisplayName';
+var
+  oRegistry: TRegistry;
+  rKey: HKEY;
+  sRootPath: string;
+  oKeyNames: TStringList;
+  sKey: string;
+begin
+  Result    := False;
+  oRegistry := TRegistry.Create(KEY_READ);
+  oKeyNames := TStringList.Create;
+  try
+    for rKey in ROOT_KEYS do
+    begin
+      oRegistry.RootKey := rKey;
+      for sRootPath in ROOT_PATHS do
+      begin
+        if (not oRegistry.OpenKeyReadOnly(sRootPath)) then
+          Continue;
+        oRegistry.GetKeyNames(oKeyNames);
+        oRegistry.CloseKey;
+        for sKey in oKeyNames do
+        begin
+          if (not oRegistry.OpenKeyReadOnly(sRootPath + '\' + sKey)) then
+            Continue;
+          try
+            if (oRegistry.ValueExists(KEY) and (oRegistry.ReadString(KEY).ToUpper.Contains(ADisplayName.ToUpper))) then
+            begin
+              Result := True;
+              Exit;
+            end;
+          finally
+            oRegistry.CloseKey;
+          end;
+        end;
+      end;
+    end;
+  finally
+    FreeAndNil(oRegistry);
+    FreeAndNil(oKeyNames);
+  end;
+end;
 
 class function TRegistryHelper.GetKey(
   const ARootKey: HKEY;

@@ -13,19 +13,22 @@ type
     function GetIsInstalled: Boolean;
     function GetMinecraftRootPath: string;
     procedure SetMinecraftRootPath(const Value: string);
+    function GetCurseForgeInstanceList: TCurseForgeInstanceList;
   protected
   public
     constructor Create;
 
     property IsInstalled: Boolean read GetIsInstalled;
     property MinecraftRootPath: string read GetMinecraftRootPath write SetMinecraftRootPath;
+    property CurseForgeInstanceList: TCurseForgeInstanceList read GetCurseForgeInstanceList;
   end;
 
 
 implementation
 
 uses
-  CurseForge.Consts
+  CurseForge.Consts,
+  System.JSON
   ;
 
 { TCurseForgeDLL }
@@ -33,6 +36,18 @@ uses
 constructor TCurseForgeDLL.Create;
 begin
   inherited Create(CurseForge.Consts.CURSEFORGE_DLL_FILENAME);
+end;
+
+function TCurseForgeDLL.GetCurseForgeInstanceList: TCurseForgeInstanceList;
+var
+  rCurseForgeInstanceList: TFunctionCurseForgeInstanceList;
+begin
+  try
+    rCurseForgeInstanceList := Proc[CurseForge.Consts.FUNCTION_CURSEFORGE_INSTANCE_LIST];
+    Result := TCurseForgeInstanceList.FromJSON(TJSONArray.ParseJSONValue(rCurseForgeInstanceList) as TJSONArray);
+  except
+    Result := nil;
+  end;
 end;
 
 function TCurseForgeDLL.GetIsInstalled: Boolean;

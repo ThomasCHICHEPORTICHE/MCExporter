@@ -1,5 +1,7 @@
 program AppMCExporter;
 
+{$R *.dres}
+
 uses
   System.StartUpCopy,
   FMX.Forms,
@@ -9,7 +11,8 @@ uses
   DLLLoader in '..\object\dllloader\DLLLoader.pas',
   CurseForge.Types in '..\object\curseforge\CurseForge.Types.pas',
   Helper.JSON in '..\object\helper\Helper.JSON.pas',
-  Frame.Main in '..\frame\Frame.Main.pas' {FrameMain: TFrame};
+  Frame.Main in '..\frame\Frame.Main.pas' {FrameMain: TFrame},
+  Frame.CurseForge.Instance in '..\frame\Frame.CurseForge.Instance.pas' {FrameCurseForgeInstance: TFrame};
 
 {$R *.res}
 
